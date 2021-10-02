@@ -1,0 +1,15 @@
+.form-control{
+	background: #0010804f;
+	box-shadow: 5px 5px #eee;
+	text-align: center;
+}
+.phone{
+	float: left;
+    border: 1px solid #eee;
+    padding: 7px 10px;
+    box-shadow: 5px 5px #eee;
+    background: #6ea1ac;
+}
+.phone-text{
+	float: left;
+}

@@ -1,0 +1,76 @@
+<?php
+  session_start();
+  require('conn.php');
+
+  if(isset($_POST['submit'])){
+      $username = $_POST['username'];
+      $password = md5($_POST['password']);
+      $sql = "SELECT * FROM admin_login where username = '$username' AND password = '$password'";
+      $result = mysqli_query($conn, $sql);
+      if(mysqli_num_rows($result) > 0)
+      {
+        $data = mysqli_fetch_assoc($result);
+        $_SESSION['id'] = $data['id'];
+        $_SESSION['email'] = $data['email'];
+          header("location:payment_details.php");
+      }
+      else 
+      {
+          echo "Invalid User or Password";
+      }
+
+  }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>  Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    .formwrap{
+      width: 100%;
+      margin: 0 auto;
+      margin-top: px;
+      padding: 25px;
+      background: #eee;
+      border: 1px solid #00000047;
+    }
+    </style>
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-sm-5">
+				<div class="login-box">
+				<div class="mb-4 text-center"> <h2> Login  </h2> </div>
+				<form action="" method="POST">
+					<div class="formwrap">
+						<div class="form-group">
+						<input type="text" class="form-control" placeholder="Username" name="username">
+						</div>
+						<div class="form-group">
+						<input type="password" class="form-control" placeholder="Password" name="password">
+						</div>
+						<button type="submit" name="submit" class="btn btn-success btn-block"> Login <i class="fa fa-sign-in"></i> </button>
+					</div>
+				</form>
+				<div class="form-group">
+				<div class="login-footer">
+				    <p> Forgot <a href="forgot.php  "> Password? </a></p>
+				 </div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
